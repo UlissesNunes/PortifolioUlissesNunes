@@ -1,18 +1,17 @@
-
-import './App.css'
+import './App.css';
+import HeadingUn from '../components/HeadingUn';
 
 function App() {
- 
-
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-slate-500">
-      <h1 className="text-4xl font-bold text-emerald-400">
-        React + Tailwind 3.1
-      </h1>
-    </div>
+      <HeadingUn />
+      <div className='min-h-screen flex items-center justify-center bg-slate-500'>
+        <h1 className='text-4xl font-bold text-emerald-400'>
+          React + Tailwind 3.1
+        </h1>
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
