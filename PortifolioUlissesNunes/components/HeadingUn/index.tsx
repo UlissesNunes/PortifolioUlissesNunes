@@ -7,50 +7,69 @@ export default function HeadingUn() {
 
   // Variantes otimizadas: usam 'y' (transform) em vez de propriedades de layout
   const menuVariants = {
-    closed: { opacity: 0, y: -10, transition: { staggerChildren: 0.05, staggerDirection: -1 } },
-    open: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { staggerChildren: 0.07, delayChildren: 0.1 } 
-    }
+    closed: {
+      opacity: 0,
+      y: -10,
+      transition: { staggerChildren: 0.05, staggerDirection: -1 },
+    },
+    open: {
+      opacity: 1,
+      y: 0,
+      transition: { staggerChildren: 0.07, delayChildren: 0.1 },
+    },
   };
 
   const itemVariants = {
     closed: { opacity: 0, x: -10 },
-    open: { opacity: 1, x: 0 }
+    open: { opacity: 1, x: 0 },
   };
 
+  const navLinks = [
+  { name: 'Projetos', href: '#projects', external: false },
+  { name: 'Contato', href: 'https://wa.me/5571996194918', external: true },
+  { name: 'Github', href: 'https://github.com/UlissesNunes', external: true },
+];
+
   return (
-    <header className="fixed top-0 left-0 z-50 w-full md:h-24 px-4 sm:px-6 py-3 bg-gradient-to-r from-black from-5% via-black to-red-950 shadow-lg flex items-center justify-between will-change-transform">
-      
+    <header className='fixed top-0 left-0 z-50 w-full md:h-24 lg:h-28 px-4 sm:px-6 py-3 bg-gradient-to-r from-black from-5% via-black to-red-950 shadow-lg flex items-center justify-between will-change-transform'>
       {/* LOGO - Otimizada com hover leve */}
-      <motion.a 
-        href="#"
+      <motion.a
+        href='#'
         whileHover={{ scale: 1.02 }}
-        className="flex items-center"
+        className='flex items-center'
       >
-        <img src="/logo.png" alt="Logo" className="w-14 md:w-28 h-auto object-contain" />
+        <img
+          src='/logo.png'
+          alt='Logo'
+          className='w-14 md:w-24 h-auto object-contain'
+        />
       </motion.a>
 
       {/* NAV DESKTOP - Otimizada com delegação de eventos */}
-      <nav className="hidden md:flex gap-8 text-gray-200 font-medium">
-        {['Projects', 'Contact'].map((item) => (
-          <a 
-            key={item}
-            href={`#${item.toLowerCase()}`} 
-            className="hover:text-red-500 transition-colors duration-200 relative group"
+      <nav className='hidden md:flex gap-8 text-gray-200 font-medium'>
+        {[
+          ...navLinks
+        ].map(link => (
+          <a
+            key={link.name}
+            href={link.href}
+            target={
+              link.external ? '_blank' : '_self'
+            }
+            rel='noopener noreferrer'
+            className='hover:text-red-800 transition-colors duration-200 relative group'
           >
-            {item === 'Projects' ? 'Projetos' : 'Contato'}
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-500 transition-all group-hover:w-full" />
+            {link.name}
+            <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-red-800 transition-all group-hover:w-full' />
           </a>
         ))}
       </nav>
 
       {/* BOTÃO MOBILE - Otimizado para resposta tátil */}
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle Menu"
-        className="md:hidden text-gray-200 p-2 hover:bg-white/5 rounded-lg transition-colors"
+        aria-label='Toggle Menu'
+        className='md:hidden text-gray-200 p-2 hover:bg-white/5 rounded-lg transition-colors'
       >
         {isOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
@@ -59,25 +78,24 @@ export default function HeadingUn() {
       <AnimatePresence>
         {isOpen && (
           <motion.nav
-            initial="closed"
-            animate="open"
-            exit="closed"
+            initial='closed'
+            animate='open'
+            exit='closed'
             variants={menuVariants}
-            className="absolute top-full left-0 w-full bg-gradient-to-r from-black from-5% via-black to-red-950 backdrop-blur-xl border-t border-red-800/20 flex flex-col p-6 md:hidden shadow-2xl"
+            className='absolute top-full left-0 w-full bg-gradient-to-r from-black from-5% via-black to-red-950 backdrop-blur-xl border-t border-red-800/20 flex flex-col p-6 md:hidden shadow-2xl'
           >
-            <motion.ul className="flex flex-col gap-5">
+            <motion.ul className='flex flex-col gap-5'>
               {[
-                { name: 'Projetos', href: '#projects' },
-                { name: 'Contato', href: '#contact' }
-              ].map((link) => (
+               ...navLinks
+              ].map(link => (
                 <motion.li key={link.name} variants={itemVariants}>
-                  <a 
+                  <a
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="text-2xl font-semibold text-gray-200 active:text-red-500 flex justify-between items-center"
+                    className='text-2xl font-semibold text-gray-200 active:text-red-500 flex justify-between items-center'
                   >
                     {link.name}
-                    <span className="text-red-800">→</span>
+                    <span className='text-red-800'>→</span>
                   </a>
                 </motion.li>
               ))}
