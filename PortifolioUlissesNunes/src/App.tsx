@@ -5,9 +5,9 @@ function App() {
   return (
     <>
       <HeadingUn />
-      <div className='min-h-screen flex items-center justify-center bg-slate-500'>
-        <h1 className='text-4xl font-bold text-emerald-400'>
-          React + Tailwind 3.1
+      <div className='min-h-screen flex items-center justify-center bg-black'>
+        <h1 className='text-4xl font-bold text-red-900'>
+          Ulisses Nunes - Front-End Developer
         </h1>
       </div>
     </>
